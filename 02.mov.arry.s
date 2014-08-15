@@ -6,7 +6,7 @@
 
 .section .data
 output:
-	.asciz "the value is %d\n"
+	.asciz "the value is %d\n"	#.asciz自动在字符串结尾添加\0
 values:
 	.int 1,2,3,4,5,6,7,8,9,10	#10个元素
 .section .text
@@ -16,7 +16,7 @@ _start:
 	movl $0,%edi			#索引标记为0
 loop:
 	movl values(,%edi,4),%eax	#数组索引为%edi的值存放到%eax
-	pushl %eax
+	pushl %eax			#为调用printf提供参数#1
 	pushl $output
 	call printf
 	addl $8,%esp
@@ -26,3 +26,4 @@ loop:
 	movl $0,%ebx
 	movl $1,%eax
 	int $0x80
+
